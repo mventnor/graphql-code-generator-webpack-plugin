@@ -68,8 +68,8 @@ export default class GraphQLCodeGenPlugin {
     }
 
     return keys.some((pluginName) =>
-      // @ts-ignore
       TS_PLUGIN_KEYS.every(
+        // @ts-ignore
         (field) => this.options.pluginMap[pluginName] && this.options.pluginMap[pluginName][field]
       )
     );
