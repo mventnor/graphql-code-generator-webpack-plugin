@@ -51,11 +51,11 @@ export default class GraphQLCodeGenPlugin {
           // Works around a bug with the Typescript plugin, where it returns the
           // output instead of writing it to a file. But we don't want to lose the
           // other plugins' outputs.
-          if (this.isTypescriptPluginOneOfMany()) {
-            fs.appendFileSync(this.options.filename, "\n\n" + output, "utf-8");
-          } else {
-            fs.writeFileSync(this.options.filename, output, "utf-8");
-          }
+          //if (this.isTypescriptPluginOneOfMany()) {
+          //  fs.appendFileSync(this.options.filename, "\n\n" + output, "utf-8");
+          //} else {
+          fs.writeFileSync(this.options.filename, output, "utf-8");
+          //}
         }
       })
     );
