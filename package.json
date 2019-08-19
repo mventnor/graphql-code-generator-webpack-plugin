@@ -45,7 +45,7 @@
     "prettier": "1.16.4",
     "pretty-quick": "1.11.1",
     "typescript": "3.5.1",
-    "yarn": "1.16.0"
+    "yarn": "1.17.3"
   },
   "peerDependencies": {
     "@graphql-codegen/core": "^1.0.0",
