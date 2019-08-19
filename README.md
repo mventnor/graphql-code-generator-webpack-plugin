@@ -1,4 +1,4 @@
-# @graphql-codegen/webpack-plugin
+# graphql-code-generator-webpack-plugin
 
 Runs [GraphQL Code Generator](https://github.com/dotansimha/graphql-code-generator) as part of the Webpack compilation process. It will run before type-checkers like fork-ts-checker-webpack-plugin.
 
@@ -10,13 +10,13 @@ Instead of passing a GraphQL schema through `schema`, you pass the location to t
 Install as a dev dependency:
 
 ```bash
-npm install --save-dev @graphql-codegen/webpack-plugin
+npm install --save-dev graphql-code-generator-webpack-plugin
 ```
 
 Then, add the plugin to the `plugins` array in your Webpack config:
 
 ```javascript
-import GraphqlCodegen from "@graphql-codegen/webpack-plugin";
+import GraphqlCodegen from "graphql-code-generator-webpack-plugin";
 
 // ....
 
