@@ -1,6 +1,6 @@
 {
   "name": "graphql-code-generator-webpack-plugin",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Runs graphql-codegen as part of the Webpack compilation process",
   "main": "dist/index.js",
   "files": [
@@ -40,7 +40,6 @@
     "@types/graphql": "14.2.0",
     "@types/prettier": "1.15.2",
     "@types/webpack": "4.4.32",
-    "graphql": "14.3.1",
     "husky": "3.0.4",
     "prettier": "1.16.4",
     "pretty-quick": "1.11.1",

@@ -20,12 +20,6 @@ interface PluginOptions {
   skipDuplicateDocumentsValidation?: boolean;
 }
 
-const TS_PLUGIN_KEYS = [
-  "TsVisitor",
-  "TsIntrospectionVisitor",
-  "TypeScriptOperationVariablesToObject"
-];
-
 export default class GraphQLCodeGenPlugin {
   public options: PluginOptions;
 
@@ -34,7 +28,6 @@ export default class GraphQLCodeGenPlugin {
     this.options = {
       config: {},
       pluginMap: {},
-      plugins: [],
       documents: [],
       ...options!
     };
@@ -42,36 +35,15 @@ export default class GraphQLCodeGenPlugin {
 
   public apply(compiler: Compiler) {
     const { schemaFile, ...otherOptions } = this.options;
-    compiler.hooks.beforeCompile.tapPromise("@graphql-codegen/webpack-plugin", () =>
+    compiler.hooks.beforeCompile.tapPromise("graphql-code-generator-webpack-plugin", () =>
       codegen({
         ...otherOptions,
         schema: parse(fs.readFileSync(this.options.schemaFile, "utf-8"))
       }).then((output) => {
         if (output) {
-          // Works around a bug with the Typescript plugin, where it returns the
-          // output instead of writing it to a file. But we don't want to lose the
-          // other plugins' outputs.
-          //if (this.isTypescriptPluginOneOfMany()) {
-          //  fs.appendFileSync(this.options.filename, "\n\n" + output, "utf-8");
-          //} else {
           fs.writeFileSync(this.options.filename, output, "utf-8");
-          //}
         }
       })
-    );
-  }
-
-  private isTypescriptPluginOneOfMany(): boolean {
-    const keys = Object.keys(this.options.pluginMap);
-    if (keys.length <= 1) {
-      return false;
-    }
-
-    return keys.some((pluginName) =>
-      TS_PLUGIN_KEYS.every(
-        // @ts-ignore
-        (field) => this.options.pluginMap[pluginName] && this.options.pluginMap[pluginName][field]
-      )
     );
   }
 
@@ -85,7 +57,7 @@ export default class GraphQLCodeGenPlugin {
     }
 
     if (!options.plugins) {
-      throw new Error("Options must contain 'plugins' with a map of plugin config.");
+      throw new Error("Options must contain 'plugins' with an array of plugin config objects.");
     }
 
     if (!options.pluginMap) {
