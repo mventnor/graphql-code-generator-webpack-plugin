@@ -40,7 +40,13 @@ export default class GraphQLCodeGenPlugin {
         ...otherOptions,
         schema: parse(fs.readFileSync(this.options.schemaFile, "utf-8"))
       }).then((output) => {
-        if (output) {
+        // For Webpack watch mode. Don't write a generated file if its identical.
+        let currentOutput: string = "";
+        try {
+          currentOutput = fs.readFileSync(this.options.filename, "utf-8");
+        } catch (ex) {}
+
+        if (output && currentOutput !== output) {
           fs.writeFileSync(this.options.filename, output, "utf-8");
         }
       })
