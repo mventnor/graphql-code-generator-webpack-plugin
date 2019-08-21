@@ -1,6 +1,6 @@
 {
   "name": "graphql-code-generator-webpack-plugin",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Runs graphql-codegen as part of the Webpack compilation process",
   "main": "dist/index.js",
   "files": [
